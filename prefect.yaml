@@ -1,0 +1,19 @@
+deployments:
+- name: log_flow-deployment.yaml
+  version:
+  tags: []
+  description:
+  entrypoint: log_flow.py:log_flow
+  parameters: {}
+  work_pool:
+    name: try-project
+    work_queue_name:
+    job_variables: {}
+  schedules:
+  - cron: 0 8 * * *
+    timezone: America/New_York
+    day_or: true
+    active: true
+  pull:
+  - prefect.deployments.steps.set_working_directory:
+      directory: /Users/bryanwang/Downloads/nasdaq_project

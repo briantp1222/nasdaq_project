@@ -1,0 +1,41 @@
+deployments:
+- name: update_aapl_market_data
+  version:
+  tags: []
+  description:
+  entrypoint:
+  parameters:
+    db_url: mysql+mysqlconnector://root:NIdeshengri200!@localhost/nasdaq_data
+    table_name: AAPL_market_data
+  work_pool:
+    name: try-project
+    work_queue_name:
+    job_variables: {}
+  schedules:
+  - cron: 0 8 * * *
+    timezone: America/New_York
+    day_or: true
+    active: true
+  pull:
+  - prefect.deployments.steps.set_working_directory:
+      directory: /Users/bryanwang/Downloads/nasdaq_project/src
+- name: update_aapl_market_data
+  version:
+  tags: []
+  description:
+  entrypoint: Update_AAPL.py:update_aapl_data_flow
+  parameters:
+    db_url: mysql+mysqlconnector://root:NIdeshengri200!@localhost/nasdaq_data
+    table_name: AAPL_market_data
+  work_pool:
+    name: try-project
+    work_queue_name:
+    job_variables: {}
+  schedules:
+  - cron: 0 8 * * *
+    timezone: America/New_York
+    day_or: true
+    active: true
+  pull:
+  - prefect.deployments.steps.set_working_directory:
+      directory: /Users/bryanwang/Downloads/nasdaq_project/src

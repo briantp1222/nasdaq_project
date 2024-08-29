@@ -1,0 +1,17 @@
+version: 2
+
+flows:
+  - name: log_flow
+    script: ./log_flow.py
+    entrypoint: log_flow
+    parameters:
+      name: "World"
+    tags: []
+    work_pool:
+      name: test
+
+infra:
+  - type: docker-container
+    image: prefecthq/prefect:latest
+    env:
+      EXTRA_PIP_PACKAGES: "s3fs"
